@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF ラスタライズ変換ツール</title>
+    <script src="pdf.min.js"></script>
+    <script src="pdf-lib.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📄 PDF ラスタライズ変換ツール</h1>
+        <p>PDFファイルを画像ベースのPDFに変換します</p>
+      </div>
+
+      <div class="main-content">
+        <div class="drop-zone" id="dropZone">
+          <div class="drop-icon">📁</div>
+          <div class="drop-text">PDFファイルをドラッグ＆ドロップ</div>
+          <div class="drop-subtext">または、クリックしてファイルを選択</div>
+          <input type="file" id="fileInput" class="file-input" accept=".pdf" />
+        </div>
+
+        <div class="settings">
+          <h3>⚙️ 変換設定</h3>
+          <div class="setting-row">
+            <label for="dpiSelect">解像度 (DPI):</label>
+            <select id="dpiSelect">
+              <option value="150">150 DPI (軽量)</option>
+              <option value="200">200 DPI (標準)</option>
+              <option value="300" selected>300 DPI (高品質)</option>
+              <option value="600">600 DPI (最高品質)</option>
+            </select>
+          </div>
+          <div class="setting-row">
+            <label for="qualitySlider">JPEG品質:</label>
+            <input type="range" id="qualitySlider" min="50" max="100" value="90" />
+            <span id="qualityValue">90</span>%
+          </div>
+          <div class="setting-row">
+            <label for="formatSelect">出力形式:</label>
+            <select id="formatSelect">
+              <option value="jpeg" selected>JPEG</option>
+              <option value="png">PNG</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="convert-btn" id="convertBtn" disabled>🔄 変換開始</button>
+
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-text" id="progressText">準備中...</div>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="result-section" id="resultSection">
+          <h3>✅ 変換完了！</h3>
+          <p>ラスタライズされたPDFが生成されました。</p>
+          <br />
+          <a href="#" class="download-btn" id="downloadBtn" download="converted.pdf"> ⬇️ PDFをダウンロード </a>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
