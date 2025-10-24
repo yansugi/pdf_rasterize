@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDFラスタライズ変換ツール</title>
+    <script src="pdf.min.js"></script>
+    <script src="jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📄 PDFラスタライズ変換ツール</h1>
+        <p>PDFファイルを画像ベースのPDFに変換します</p>
+      </div>
+
+      <div class="content">
+        <!-- ファイルドロップエリア -->
+        <div class="drop-zone" id="dropZone">
+          <div class="folder-icon">📁</div>
+          <h3>PDFファイルをドラッグ＆ドロップ</h3>
+          <p>または、クリックしてファイルを選択</p>
+        </div>
+
+        <input type="file" id="fileInput" class="file-input" accept=".pdf" />
+
+        <!-- ファイル情報 -->
+        <div class="file-info" id="fileInfo"></div>
+
+        <!-- 変換設定 -->
+        <div class="settings">
+          <h3>⚙️ 変換設定</h3>
+
+          <div class="form-group">
+            <label for="resolution">解像度 (DPI):</label>
+            <select id="resolution">
+              <option value="1.0">72 DPI (標準)</option>
+              <option value="1.5" selected>108 DPI (高画質)</option>
+              <option value="2.0">144 DPI (最高画質)</option>
+              <option value="2.5">180 DPI (印刷品質)</option>
+              <option value="3.0">216 DPI (超高解像度)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="quality">JPEG品質:</label>
+            <div class="slider-group">
+              <input type="range" id="quality" class="slider" min="10" max="100" value="90" />
+              <span class="slider-value" id="qualityValue">90 %</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="format">出力形式:</label>
+            <select id="format">
+              <option value="jpeg" selected>JPEG</option>
+              <option value="png">PNG</option>
+            </select>
+          </div>
+
+          <button class="toggle-btn" id="advancedToggle">詳細設定を表示</button>
+
+          <div class="advanced-settings" id="advancedSettings">
+            <div class="checkbox-group">
+              <input type="checkbox" id="doubleRasterize" />
+              <label for="doubleRasterize">2重ラスタライズ (より確実)</label>
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="antiOCR" />
+              <label for="antiOCR">Anti-OCR (テキスト抽出防止)</label>
+            </div>
+
+            <div class="form-group">
+              <label for="noiseLevel">ノイズレベル: 高いほど藁半紙をスキャンしたような仕上がり</label>
+              <div class="slider-group">
+                <input type="range" id="noiseLevel" class="slider" min="0" max="10" value="3" />
+                <span class="slider-value" id="noiseLevelValue">3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 進捗表示 -->
+        <div class="progress" id="progress">
+          <div class="progress-text" id="progressText">処理中...</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <!-- ダウンロードエリア -->
+        <div class="download-area" id="downloadArea">
+          <h3>✅ 変換完了！</h3>
+          <p>ラスタライズされたPDFをダウンロードできます</p>
+          <br />
+          <a href="#" class="download-btn" id="downloadBtn"> 📥 ダウンロード </a>
+        </div>
+
+        <!-- 変換ボタン -->
+        <button class="convert-btn" id="convertBtn" disabled>🚀 変換開始</button>
+      </div>
+    </div>
+    <script src="main.js"></script>
+
+  </body>
+</html>
